@@ -1,0 +1,7 @@
+# Extra deps for all aesthetic-4K models.
+# pip install -r requirements_all_models.txt
+
+loguru                    # FreCaS
+webdataset                # FreCaS
+pytorch-wavelets          # DiffuseHigh
+PyWavelets                # I-Max (pywt)

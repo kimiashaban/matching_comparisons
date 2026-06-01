@@ -1,0 +1,17 @@
+# Top-level helpers and evaluation metrics.
+# Model-specific repos have incompatible version pins, so use requirements/*.txt
+# for generation environments.
+-r benchmark/requirements.txt
+loguru
+webdataset
+pytorch-wavelets
+PyWavelets
+opencv-python
+accelerate
+sentencepiece
+einops
+omegaconf
+peft
+safetensors
+tqdm
+protobuf

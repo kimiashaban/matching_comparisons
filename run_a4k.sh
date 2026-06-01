@@ -45,7 +45,7 @@ mkdir -p logs manifests
 
 JOB_INDEX="${JOB_INDEX:-0}"
 TOTAL_JOBS="${TOTAL_JOBS:-1}"
-SEED="${SEED:-12345}"
+SEED="${SEED:-42}"
 
 ALL_MODELS=(ScaleDiff I-Max HiFlow DiffuseHigh DyPE DyPE-Qwen FreCaS FreeScale)
 ALL_RESOLUTIONS=(2048x4096 3072x3072 4096x4096 4096x2048)

@@ -112,7 +112,7 @@ def main() -> int:
     parser.add_argument(
         "--seed",
         type=int,
-        default=12345,
+        default=42,
         help="Random seed",
     )
     parser.add_argument(

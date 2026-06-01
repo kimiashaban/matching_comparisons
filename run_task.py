@@ -5,7 +5,7 @@ Reads manifest to know all prompts; infers "done" from output dir; runs only rem
 Supports parallel jobs via --job-index and --total-jobs.
 
 Usage:
-  python run_task.py --model ScaleDiff --resolution 4096x4096 --seed 12345
+  python run_task.py --model ScaleDiff --resolution 4096x4096 --seed 42
   python run_task.py --model DyPE --resolution 4096x4096 --job-index 0 --total-jobs 2
   python run_task.py --model FreCaS --resolution 2048x4096 --dry-run
 """
@@ -87,7 +87,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Run a (model, resolution) task with manifest-based resume")
     parser.add_argument("--model", "-m", required=True, help="Model name")
     parser.add_argument("--resolution", "-r", required=True, help="e.g. 4096x4096, 2048x2048")
-    parser.add_argument("--seed", type=int, default=12345)
+    parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--batch-size", type=int, default=None, help="Default: 2 for 4096, 4 for 2048")
     parser.add_argument("--job-index", type=int, default=0, help="For parallel: this job's index (0-based)")
     parser.add_argument("--total-jobs", type=int, default=1, help="For parallel: total number of jobs")

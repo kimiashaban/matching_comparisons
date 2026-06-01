@@ -9,7 +9,7 @@ RESOLUTIONS=${2:-}
 N_JOBS=${3:-1}
 HOURS=${5:-12}
 GPU_TYPE=${6:-l40s}
-SEED=${7:-12345}
+SEED=${7:-42}
 
 # DyPE-Qwen: prefer 4 GPUs at high res (override with 4th arg, e.g. 2)
 if [[ "$MODEL" == "DyPE-Qwen" ]]; then
@@ -29,7 +29,7 @@ if [[ -z "$MODEL" ]]; then
   echo "  N_GPUS:      GPUs per job (default 1; >=2 enables --multi_gpu)"
   echo "  HOURS:       time limit in hours (default 12)"
   echo "  GPU_TYPE:    l40s or h100 (default l40s)"
-  echo "  SEED:        generation seed (default 12345)"
+  echo "  SEED:        generation seed (default 42)"
   echo ""
   echo "Examples:"
   echo "  $0 ScaleDiff                                     # all res, 1 job, 1 GPU, 12h, l40s"
@@ -37,7 +37,7 @@ if [[ -z "$MODEL" ]]; then
   echo "  $0 DyPE \"4096x4096 3072x3072\"                    # two resolutions"
   echo "  $0 DyPE all 3                                     # all res, 3 parallel jobs"
   echo "  $0 DyPE 4096x4096 3 2                             # 3 jobs, 2 GPUs (multi-GPU)"
-  echo "  $0 HiFlow 4096x4096 1 2 8 h100 12345             # 2x H100, 8h"
+  echo "  $0 HiFlow 4096x4096 1 2 8 h100 42                # 2x H100, 8h"
   echo "  $0 all all 2 2 12 h100                            # all models, all res, 2 jobs, 2x H100"
   exit 1
 fi

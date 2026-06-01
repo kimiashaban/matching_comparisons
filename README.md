@@ -97,10 +97,10 @@ Submit to SLURM:
 ./submit_a4k.sh DyPE-Qwen "4096x4096" 1 4 12 h100 12345
 ```
 
-Run all requested models:
+Run all requested models except `DyPE-Qwen`:
 
 ```bash
-./submit_a4k.sh all "4096x4096" 1 1 12 l40s
+./submit_a4k.sh all "4096x4096" 1 1 12 l40s 12345
 ```
 
 Outputs are written to:

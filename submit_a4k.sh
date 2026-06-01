@@ -23,6 +23,7 @@ if [[ -z "$MODEL" ]]; then
   echo ""
   echo "  MODEL:       ScaleDiff, I-Max, HiFlow, DiffuseHigh, DyPE, DyPE-Qwen,"
   echo "               FreCaS, FreeScale, or all"
+  echo "               all submits every model except DyPE-Qwen"
   echo "  RESOLUTIONS: space-separated, e.g. \"4096x4096\" or \"4096x4096 2048x4096\""
   echo "               use \"all\" or \"\" for all resolutions (default: all)"
   echo "  N_JOBS:      number of parallel jobs (default 1)"
@@ -53,13 +54,23 @@ MULTI_GPU=0
 
 TIME_FMT="${HOURS}:00:00"
 
-for i in $(seq 0 $((N_JOBS - 1))); do
-  job_name="a4k_${MODEL}_${i}"
-  echo "Submitting $job_name (job $i of $N_JOBS for $MODEL, ${N_GPUS}x ${GPU_TYPE}, ${HOURS}h, seed ${SEED})"
-  sbatch -J "$job_name" \
-    --gres=gpu:${GPU_TYPE}:${N_GPUS} \
-    --time=${TIME_FMT} \
-    --export=ALL,MODEL="$MODEL",JOB_INDEX=$i,TOTAL_JOBS=$N_JOBS,MULTI_GPU=$MULTI_GPU,RESOLUTIONS="$RESOLUTIONS",SEED="$SEED" \
-    run_a4k.sh
+ALL_MODELS=(ScaleDiff I-Max HiFlow DiffuseHigh DyPE FreCaS FreeScale)
+
+if [[ "$MODEL" == "all" ]]; then
+  RUN_MODELS=("${ALL_MODELS[@]}")
+else
+  RUN_MODELS=("$MODEL")
+fi
+
+for model in "${RUN_MODELS[@]}"; do
+  for i in $(seq 0 $((N_JOBS - 1))); do
+    job_name="a4k_${model}_${i}"
+    echo "Submitting $job_name (job $i of $N_JOBS for $model, ${N_GPUS}x ${GPU_TYPE}, ${HOURS}h, seed ${SEED})"
+    sbatch -J "$job_name" \
+      --gres=gpu:${GPU_TYPE}:${N_GPUS} \
+      --time=${TIME_FMT} \
+      --export=ALL,MODEL="$model",JOB_INDEX=$i,TOTAL_JOBS=$N_JOBS,MULTI_GPU=$MULTI_GPU,RESOLUTIONS="$RESOLUTIONS",SEED="$SEED" \
+      run_a4k.sh
+  done
 done
-echo "Submitted $N_JOBS job(s) for $MODEL (${N_GPUS}x ${GPU_TYPE}, ${HOURS}h, seed ${SEED}). Check: squeue -u \$USER"
+echo "Submitted $N_JOBS job(s) for ${#RUN_MODELS[@]} model(s) (${N_GPUS}x ${GPU_TYPE}, ${HOURS}h, seed ${SEED}). Check: squeue -u \$USER"

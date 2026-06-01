@@ -25,7 +25,7 @@
 #SBATCH --output=logs/a4k-%j.out
 #SBATCH --error=logs/a4k-%j.err
 #SBATCH --mail-type=START,END,FAIL
-#SBATCH --mail-user=kimia.shaban@mail.utoronto.ca
+#SBATCH --mail-user=andrew.jm.fleet@gmail.com
 
 set -e
 nvidia-smi

@@ -20,9 +20,13 @@ REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 RESOLUTION="${RESOLUTION:-4096x4096}"
 MODELS="${MODELS:-ScaleDiff I-Max HiFlow DiffuseHigh DyPE DyPE-Qwen FreCaS FreeScale}"
 METRICS="${METRICS:-clip_score aesthetic image_reward hps_v2 hps_v2_1 pick_score arniqa clipiqa liqe musiq niqe nrqm topiq_nr}"
+METRICS_ENV="${METRICS_ENV:-$HOME/envs/metrics}"
 
 cd "$REPO_ROOT"
 mkdir -p logs results
+
+module load StdEnv/2023 gcc/12.3 python/3.11 arrow/24.0.0 opencv/4.13.0
+source "$METRICS_ENV/bin/activate"
 
 python benchmark/evaluate.py \
   --resolution "$RESOLUTION" \

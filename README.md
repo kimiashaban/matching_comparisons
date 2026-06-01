@@ -51,6 +51,9 @@ source ~/envs/dype_qwen/bin/activate
 pip install --upgrade pip
 pip install -r requirements/dype.txt
 
+# Alliance/Compute Canada: load Arrow and OpenCV before activating this env.
+deactivate 2>/dev/null || true
+module load StdEnv/2023 gcc/12.3 python/3.11 arrow/24.0.0 opencv/4.13.0
 python -m venv ~/envs/metrics
 source ~/envs/metrics/bin/activate
 pip install --upgrade pip
@@ -115,6 +118,7 @@ The default generation seed is `12345`, chosen so these images do not duplicate 
 Use the metrics environment:
 
 ```bash
+module load StdEnv/2023 gcc/12.3 python/3.11 arrow/24.0.0 opencv/4.13.0
 source ~/envs/metrics/bin/activate
 python benchmark/evaluate.py \
   --resolution 4096x4096 \

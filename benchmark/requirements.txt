@@ -1,3 +1,6 @@
+# Alliance/Compute Canada: load these modules before activating the venv:
+# module load StdEnv/2023 gcc/12.3 python/3.11 arrow/24.0.0 opencv/4.13.0
+# pyarrow and opencv are provided by modules; pip otherwise sees dummy wheels.
 torch>=2.0.0
 torchvision>=0.15.0
 transformers>=4.35.0

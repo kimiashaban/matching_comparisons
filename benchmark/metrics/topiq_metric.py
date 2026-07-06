@@ -43,7 +43,11 @@ class TOPIQMetric(ReferenceFreeMetric):
             return
         import pyiqa
 
-        self._model = pyiqa.create_metric("topiq_nr", device=self.device)
+        self._model = pyiqa.create_metric(
+            "topiq_nr",
+            device=self.device,
+            backbone_pretrain=False,
+        )
 
     @staticmethod
     def _resize(img: Image.Image, max_side: int = INPUT_SIZE) -> Image.Image:

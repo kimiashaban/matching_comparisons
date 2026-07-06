@@ -38,9 +38,24 @@ class ARNIQAMetric(ReferenceFreeMetric):
     def load_model(self) -> None:
         if self._model is not None:
             return
+        import torchvision.models
         import pyiqa
 
-        self._model = pyiqa.create_metric("arniqa", device=self.device)
+        # pyiqa's ARNIQA constructor asks torchvision for pretrained ResNet50
+        # weights, then immediately replaces that encoder with ARNIQA weights.
+        # On offline Compute Canada compute nodes, that redundant download can
+        # block the metric even when the real ARNIQA checkpoints are cached.
+        original_resnet50 = torchvision.models.resnet50
+
+        def resnet50_without_imagenet_download(*args, **kwargs):
+            kwargs["weights"] = None
+            return original_resnet50(*args, **kwargs)
+
+        torchvision.models.resnet50 = resnet50_without_imagenet_download
+        try:
+            self._model = pyiqa.create_metric("arniqa", device=self.device)
+        finally:
+            torchvision.models.resnet50 = original_resnet50
 
     @torch.no_grad()
     def compute(

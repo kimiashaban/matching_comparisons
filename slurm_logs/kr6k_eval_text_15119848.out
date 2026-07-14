@@ -1,0 +1,38 @@
+[kr6k_eval_text] start 2026-07-03T15:11:08-04:00 host=rg31903
+Metrics to compute: ['clip_score', 'aesthetic', 'image_reward', 'hps_v2', 'hps_v2_1', 'pick_score']
+
+============================================================
+Evaluating: K-Rope-SEGA-predictor-cautious-6k-final20
+============================================================
+  Image directory: /lustre10/scratch/kimias/matching_comparisons/outputs_by_res/6144x6144/K-Rope-SEGA-predictor-cautious-6k-final20
+  Found 20 images
+  Loading images from /lustre10/scratch/kimias/matching_comparisons/outputs_by_res/6144x6144/K-Rope-SEGA-predictor-cautious-6k-final20...
+  Loaded 20 images.
+  Loading prompts from /lustre10/scratch/kimias/ultraimage/experiments/data/aes4k_5120_final_20.jsonl...
+  Computing clip_score...
+  clip_score = 28.589844  (36.4s)
+  Computing aesthetic...
+  aesthetic = 6.141560  (4.2s)
+  Computing image_reward...
+Couldn't access the Hub to check for update but local file already exists. Defaulting to existing file. (error: Cannot reach https://huggingface.co/THUDM/ImageReward/resolve/main/ImageReward.pt: offline mode is enabled. To disable it, please unset the `HF_HUB_OFFLINE` environment variable.)
+load checkpoint from /home/kimias/.cache/ImageReward/ImageReward.pt
+Couldn't access the Hub to check for update but local file already exists. Defaulting to existing file. (error: Cannot reach https://huggingface.co/THUDM/ImageReward/resolve/main/med_config.json: offline mode is enabled. To disable it, please unset the `HF_HUB_OFFLINE` environment variable.)
+checkpoint loaded
+  image_reward = 0.895782  (14.8s)
+  Computing hps_v2...
+INFO:root:Loaded ViT-H-14 model config.
+INFO:root:Loading pretrained ViT-H-14 weights (laion2B-s32B-b79K).
+  hps_v2 = 0.284521  (24.4s)
+  Computing hps_v2_1...
+  hps_v2_1 = 0.271497  (15.4s)
+  Computing pick_score...
+  pick_score = 23.078906  (17.2s)
+
+===============================================================================================================================
+Model                                          clip_score     aesthetic  image_reward        hps_v2      hps_v2_1    pick_score
+-------------------------------------------------------------------------------------------------------------------------------
+K-Rope-SEGA-predictor-cautious-6k-final20         28.5898        6.1416        0.8958        0.2845        0.2715       23.0789
+===============================================================================================================================
+
+Results saved to results/6144x6144_K-Rope-SEGA-predictor-cautious-6k-final20_text_metrics.csv
+[kr6k_eval_text] done 2026-07-03T15:16:16-04:00
